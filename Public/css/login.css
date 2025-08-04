@@ -1,0 +1,85 @@
+    body {
+      background-color: #121212;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 480px;
+    }
+    .form-section {
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    /* Botões superiores estilo btn-submit-dark */
+    .switch-buttons {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    .switch-buttons button {
+      flex: 1;
+      background-color: #2c2f33;
+      color: #fff;
+      border: 1.5px solid #ddd;
+      border-radius: 0;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+    .switch-buttons button:not(:last-child) {
+      border-right: none;
+    }
+    .switch-buttons button.active {
+      background-color: #40444b;
+      border-color: #fff;
+      color: #fff;
+    }
+    .switch-buttons button:hover:not(.active),
+    .switch-buttons button:focus:not(.active) {
+      background-color: #3a3d42;
+      border-color: #ccc;
+      color: #eee;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .form-control {
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: #fff;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      background-color: #2a2a2a;
+      color: #fff;
+      box-shadow: none;
+      outline: none;
+    }
+    .logo {
+      max-width: 100px;
+      margin-bottom: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    /* Botões submit personalizados */
+    .btn-submit-dark {
+      background-color: #2c2f33;
+      color: #fff;
+      border: 1.5px solid #ddd;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-submit-dark:hover,
+    .btn-submit-dark:focus {
+      background-color: #40444b;
+      color: #fff;
+      border-color: #fff;
+      outline: none;
+      box-shadow: none;
+    }
