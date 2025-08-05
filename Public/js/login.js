@@ -21,3 +21,10 @@
       registerForm.classList.remove("hidden");
       loginForm.classList.add("hidden");
     });
+    
+
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    if (error) {
+      alert("Erro ao realizar o login: " + error);
+    }
