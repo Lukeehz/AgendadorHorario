@@ -14,40 +14,37 @@ module.exports = class AuthController {
   static login(req, res) {
     res.sendFile(filePath);
   }
+  static async loginPost(req, res) {
+    try {
+      const { email, password } = req.body;
 
-static async loginPost(req, res) {
-  try {
-    const { email, password } = req.body;
+      const user = await User.findOne({ where: { email } });
 
-    const user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      return res.status(400).redirect("/auth?error=Email nao cadastrado");
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.senha);
-
-    if (!passwordMatch) {
-      return res.status(400).redirect("/auth?error=Senha incorreta");
-    }
-
-    req.session.userid = user.id;
-
-    req.session.save(err => {
-      if (err) {
-        console.error("Erro ao salvar sessão:", err);
-        return res.status(500).redirect("/auth?error=Erro ao iniciar sessão");
+      if (!user) {
+        return res.status(400).redirect("/auth?error=Email nao cadastrado");
       }
 
-      res.redirect("/");
-    });
-  } catch (error) {
-    console.error("Erro no login:", error);
-    return res.status(500).redirect("/auth?error=Erro interno no servidor");
+      const passwordMatch = await bcrypt.compare(password, user.senha);
+
+      if (!passwordMatch) {
+        return res.status(400).redirect("/auth?error=Senha incorreta");
+      }
+
+      req.session.userid = user.id;
+
+      req.session.save((err) => {
+        if (err) {
+          console.error("Erro ao salvar sessão:", err);
+          return res.status(500).redirect("/auth?error=Erro ao iniciar sessão");
+        }
+
+        res.redirect("/");
+      });
+    } catch (error) {
+      console.error("Erro no login:", error);
+      return res.status(500).redirect("/auth?error=Erro interno no servidor");
+    }
   }
-}
-
-
   static async registerPost(req, res) {
     const { name, email, password, confirmPassword } = req.body;
 
@@ -79,7 +76,11 @@ static async loginPost(req, res) {
       });
     } catch (err) {
       console.log("Erro: ", err);
-            res.status(500).redirect("/auth?error=Erro no servidor");
+      res.status(500).redirect("/auth?error=Erro no servidor");
     }
+  }
+  static logout(req, res) {
+    req.session.destroy();
+    res.redirect("/auth");
   }
 };
