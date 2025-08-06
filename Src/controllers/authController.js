@@ -16,7 +16,26 @@ module.exports = class AuthController {
   }
 
   static async loginPost(req, res){
-    
+
+    const {email,password} = req.body
+
+    const user = await User.findOne({where:{email:email}})
+
+    if(!user){
+      return res.status(400).redirect("/auth?error=Email nao cadastrado")
+    }
+
+    const passwordMatch = await bcrypt.compare(password,user.senha)
+
+    if(!passwordMatch){
+      return res.status(400).redirect("/auth?error=Senha incorreta")
+    }
+
+    req.session.userid = user.id
+    req.session.save((err)=>{
+      res.redirect("/")
+    })
+
   }
 
   static async registerPost(req, res) {
