@@ -15,28 +15,38 @@ module.exports = class AuthController {
     res.sendFile(filePath);
   }
 
-  static async loginPost(req, res){
+static async loginPost(req, res) {
+  try {
+    const { email, password } = req.body;
 
-    const {email,password} = req.body
+    const user = await User.findOne({ where: { email } });
 
-    const user = await User.findOne({where:{email:email}})
-
-    if(!user){
-      return res.status(400).redirect("/auth?error=Email nao cadastrado")
+    if (!user) {
+      return res.status(400).redirect("/auth?error=Email nao cadastrado");
     }
 
-    const passwordMatch = await bcrypt.compare(password,user.senha)
+    const passwordMatch = await bcrypt.compare(password, user.senha);
 
-    if(!passwordMatch){
-      return res.status(400).redirect("/auth?error=Senha incorreta")
+    if (!passwordMatch) {
+      return res.status(400).redirect("/auth?error=Senha incorreta");
     }
 
-    req.session.userid = user.id
-    req.session.save((err)=>{
-      res.redirect("/")
-    })
+    req.session.userid = user.id;
 
+    req.session.save(err => {
+      if (err) {
+        console.error("Erro ao salvar sessão:", err);
+        return res.status(500).redirect("/auth?error=Erro ao iniciar sessão");
+      }
+
+      res.redirect("/");
+    });
+  } catch (error) {
+    console.error("Erro no login:", error);
+    return res.status(500).redirect("/auth?error=Erro interno no servidor");
   }
+}
+
 
   static async registerPost(req, res) {
     const { name, email, password, confirmPassword } = req.body;
