@@ -6,6 +6,7 @@ const flash = require("express-flash");
 const app = express();
 
 const login = require("./Src/routers/AuthRouter.js")
+const Agenda = require("./Src/routers/agendaRouter.js")
 
 const conn = require("./Src/db/conn.js");
 
@@ -38,6 +39,7 @@ app.use(
 app.use(flash());
 
 app.use("/",login)
+app.use("/",Agenda)
 
 app.use((req, res, next) => {
     res.locals.session = req.session;
