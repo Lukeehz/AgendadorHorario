@@ -18,6 +18,14 @@ const User = sequelize.define("User", {
   tipo: {
     type: DataTypes.ENUM("cliente", "barbeiro", "proprietario", "admin"),
     allowNull: false
+  },
+  resetCode: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  resetCodeExpires: {
+    type: DataTypes.DATE,
+    allowNull: true
   }
 });
 

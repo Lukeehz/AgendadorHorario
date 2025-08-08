@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verificar Código - Barbearia</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <div class="container text-white">
+      <div class="text-center mb-4">
+        <img src="logo.png" alt="Logo" class="logo img-fluid" />
+        <h3>Verificar Código</h3>
+      </div>
+
+      <div class="form-section">
+        <form action="/forgot/code" method="POST" novalidate>
+          <div class="mb-3">
+            <label for="code" class="form-label">Código de Verificação</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              name="code"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-submit-dark w-100">
+            Verificar
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/resetpassaux.js"></script>
+  </body>
+</html>
