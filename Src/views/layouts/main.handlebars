@@ -54,6 +54,14 @@
         {{{body}}}
     </main>
 
+    <div class="container ">
+        {{#if messages.message}}
+        <div class="border border-danger w-50 fw-bold text-center mx-auto py-2">
+            {{messages.message}}
+        </div>
+        {{/if}}
+    </div>
+
     <footer>
         <p class="mb-0">&copy; 2025 Barbearia. Todos os direitos reservados.</p>
     </footer>
